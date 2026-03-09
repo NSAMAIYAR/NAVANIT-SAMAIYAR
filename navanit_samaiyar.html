@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navanit Samaiyar — Turnaround & Scale-Up Advisor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   ROOT & RESET
+══════════════════════════════════════ */
+:root {
+  --bg:      #0d0d0d;
+  --bg2:     #131313;
+  --bg3:     #1a1a1a;
+  --border:  #272727;
+  --gold:    #c8a951;
+  --gold2:   #e8c97a;
+  --golddim: #7a6330;
+  --cream:   #f0ead8;
+  --white:   #ffffff;
+  --muted:   #787878;
+  --muted2:  #4a4a4a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--golddim)}
+/* noise */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.45}
+
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.1rem 3.5rem;
+  border-bottom:1px solid transparent;
+  transition:all .35s ease;
+}
+nav.scrolled{
+  background:rgba(13,13,13,.92);
+  backdrop-filter:blur(18px);
+  border-bottom-color:var(--border);
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;
+  color:var(--cream);text-decoration:none;letter-spacing:.02em;
+  flex-shrink:0;
+}
+.nav-logo span{color:var(--gold)}
+
+/* Desktop links */
+.nav-links{display:flex;align-items:center;gap:.25rem}
+.nav-links a{
+  font-family:'DM Sans',sans-serif;font-size:.92rem;font-weight:500;
+  color:var(--cream);text-decoration:none;
+  padding:.5rem .95rem;border-radius:3px;
+  transition:color .2s,background .2s;
+  white-space:nowrap;letter-spacing:.01em;
+}
+.nav-links a:hover{color:var(--gold);background:rgba(200,169,81,.07)}
+.nav-links .nav-cta{
+  margin-left:.5rem;
+  background:var(--gold);color:#0d0d0d !important;
+  font-weight:600;padding:.48rem 1.3rem;
+  border-radius:3px;letter-spacing:.04em;font-size:.82rem;
+  transition:background .2s,transform .2s;
+}
+.nav-links .nav-cta:hover{background:var(--cream);transform:translateY(-1px)}
+
+/* Hamburger */
+.nav-burger{
+  display:none;flex-direction:column;gap:5px;
+  cursor:pointer;padding:6px;z-index:600;
+  background:none;border:none;
+}
+.nav-burger span{
+  display:block;width:25px;height:2px;
+  background:var(--cream);border-radius:2px;
+  transition:all .3s ease;
+}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile full-screen menu */
+.mobile-nav{
+  position:fixed;inset:0;z-index:400;
+  background:rgba(10,10,10,.98);
+  backdrop-filter:blur(24px);
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;gap:.5rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+}
+.mobile-nav.open{opacity:1;pointer-events:all}
+.mobile-nav a{
+  font-family:'Playfair Display',serif;
+  font-size:2.2rem;font-weight:700;
+  color:var(--cream);text-decoration:none;
+  padding:.8rem 2rem;text-align:center;
+  transition:color .2s;letter-spacing:.01em;
+  width:100%;
+}
+.mobile-nav a:hover{color:var(--gold)}
+.mobile-nav hr{width:36px;border:none;border-top:1px solid var(--border);margin:.2rem 0}
+.mobile-nav .m-cta{
+  margin-top:1rem;
+  background:var(--gold);color:#0d0d0d !important;
+  font-family:'DM Mono',monospace !important;
+  font-size:.9rem !important;font-weight:600 !important;
+  letter-spacing:.1em;padding:.9rem 3rem !important;
+  border-radius:3px;
+}
+.mobile-nav .m-sub{
+  font-family:'DM Mono',monospace;
+  font-size:.65rem;letter-spacing:.18em;
+  color:var(--muted);text-transform:uppercase;
+  margin-top:1.5rem;padding:.4rem 0 !important;
+}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+#hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 400px;gap:4rem;
+  align-items:center;
+  padding:7rem 3.5rem 5rem;
+  position:relative;overflow:hidden;
+}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(200,169,81,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,169,81,.03) 1px,transparent 1px);
+  background-size:72px 72px;pointer-events:none;
+}
+.hero-glow{
+  position:absolute;top:-15%;right:-5%;
+  width:50vw;height:50vw;
+  background:radial-gradient(ellipse,rgba(200,169,81,.07) 0%,transparent 65%);
+  pointer-events:none;transition:background .3s;
+}
+.hero-content{position:relative;z-index:2}
+.hero-eyebrow{
+  font-family:'DM Mono',monospace;font-size:.7rem;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:1.6rem;
+  opacity:0;animation:up .8s ease .15s forwards;
+}
+.hero-name{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,7vw,6.8rem);
+  font-weight:900;line-height:.93;
+  color:var(--white);letter-spacing:-.02em;
+  opacity:0;animation:up .8s ease .3s forwards;
+}
+.hero-name em{color:var(--gold);font-style:italic;display:block}
+.hero-rule{
+  width:48px;height:2px;background:var(--gold);
+  margin:1.6rem 0;
+  opacity:0;animation:up .8s ease .45s forwards;
+}
+.hero-tag{
+  font-size:clamp(.9rem,1.5vw,1.1rem);
+  font-weight:300;color:var(--cream);
+  max-width:540px;line-height:1.65;margin-bottom:2.4rem;
+  opacity:0;animation:up .8s ease .6s forwards;
+}
+.hero-tag strong{color:var(--white);font-weight:500}
+.hero-stats{
+  display:flex;gap:2.2rem;flex-wrap:wrap;margin-bottom:2.8rem;
+  opacity:0;animation:up .8s ease .75s forwards;
+}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.1rem;font-weight:700;color:var(--gold);line-height:1;
+}
+.stat-lbl{
+  font-family:'DM Mono',monospace;font-size:.6rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-top:4px;
+}
+.hero-btns{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:up .8s ease .9s forwards;
+}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.85rem 1.7rem;
+  background:var(--gold);color:#0d0d0d;
+  font-family:'DM Mono',monospace;font-size:.74rem;
+  font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;border-radius:3px;transition:all .25s;
+}
+.btn-gold:hover{background:var(--cream);transform:translateY(-2px)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.85rem 1.7rem;
+  border:1px solid rgba(200,169,81,.45);color:var(--gold);
+  font-family:'DM Mono',monospace;font-size:.74rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;border-radius:3px;transition:all .25s;
+}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(200,169,81,.07)}
+
+/* Hero photo */
+.hero-photo{
+  position:relative;z-index:2;
+  opacity:0;animation:up .9s ease .45s forwards;
+}
+.photo-frame{position:relative;border:1px solid var(--border)}
+.photo-frame::after{
+  content:'';position:absolute;
+  top:-10px;right:-10px;bottom:10px;left:10px;
+  border:1px solid var(--golddim);z-index:-1;
+  transition:all .4s ease;pointer-events:none;
+}
+.photo-frame:hover::after{top:-16px;right:-16px;bottom:16px;left:16px}
+.photo-frame img{
+  width:100%;display:block;
+  filter:grayscale(12%) contrast(1.04);
+  transition:filter .4s;
+}
+.photo-frame:hover img{filter:grayscale(0%) contrast(1.05)}
+.photo-caption{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:.85rem 1.1rem;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.photo-caption span{
+  font-family:'DM Mono',monospace;font-size:.63rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+}
+.pulse-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--gold);
+  animation:pulse 2.2s ease infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.85)}}
+
+/* ══════════════════════════════════════
+   SHARED SECTION STYLES
+══════════════════════════════════════ */
+section{padding:5.5rem 3.5rem}
+.s-label{
+  font-family:'DM Mono',monospace;font-size:.67rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;
+}
+.s-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3.5vw,3rem);
+  font-weight:700;color:var(--white);line-height:1.08;margin-bottom:.7rem;
+}
+.s-title em{font-style:italic;color:var(--gold)}
+.s-sub{font-size:.93rem;color:var(--muted);max-width:500px;line-height:1.65;margin-bottom:2.8rem}
+
+/* ══════════════════════════════════════
+   THEMES
+══════════════════════════════════════ */
+#themes{background:var(--bg2)}
+.themes-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);margin-top:2.2rem;
+}
+.theme-card{
+  background:var(--bg2);padding:2.3rem 2rem;
+  position:relative;overflow:hidden;transition:background .3s;
+}
+.theme-card::before{
+  content:'';position:absolute;top:0;left:0;
+  width:3px;height:0;background:var(--gold);transition:height .4s;
+}
+.theme-card:hover::before{height:100%}
+.theme-card:hover{background:var(--bg3)}
+.t-num{
+  font-family:'Playfair Display',serif;font-size:3.2rem;
+  font-weight:900;color:var(--border);line-height:1;
+  margin-bottom:1rem;transition:color .3s;
+}
+.theme-card:hover .t-num{color:var(--golddim)}
+.t-icon{font-size:1.4rem;margin-bottom:.9rem}
+.t-title{
+  font-family:'Playfair Display',serif;font-size:1.25rem;
+  font-weight:700;color:var(--white);margin-bottom:.7rem;line-height:1.2;
+}
+.t-body{font-size:.87rem;color:var(--muted);line-height:1.65}
+.t-proof{
+  margin-top:1.1rem;font-family:'DM Mono',monospace;
+  font-size:.67rem;color:var(--gold);letter-spacing:.04em;
+}
+
+/* ══════════════════════════════════════
+   IMPACT BAR
+══════════════════════════════════════ */
+#impact{
+  background:var(--bg);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:4.5rem 3.5rem;
+}
+.impact-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);
+  border:1px solid var(--border);
+}
+.impact-item{
+  padding:2rem 1rem;text-align:center;
+  border-right:1px solid var(--border);transition:background .3s;
+}
+.impact-item:last-child{border-right:none}
+.impact-item:hover{background:var(--bg3)}
+.i-num{
+  font-family:'Playfair Display',serif;font-size:2.3rem;
+  font-weight:900;color:var(--gold);line-height:1;display:block;
+}
+.i-lbl{
+  font-family:'DM Mono',monospace;font-size:.59rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-top:.45rem;line-height:1.4;
+}
+
+/* ══════════════════════════════════════
+   SECTORS TABLE
+══════════════════════════════════════ */
+#sectors{background:var(--bg2)}
+.sectors-table{width:100%;border-collapse:collapse;margin-top:2rem}
+.sectors-table thead tr{border-bottom:1px solid var(--golddim)}
+.sectors-table th{
+  font-family:'DM Mono',monospace;font-size:.62rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+  text-align:left;padding:.65rem .9rem;font-weight:400;
+}
+.sectors-table td{
+  padding:1rem .9rem;border-bottom:1px solid var(--border);
+  font-size:.86rem;vertical-align:top;
+}
+.sectors-table tr:hover td{background:rgba(255,255,255,.02)}
+.sec-name{font-weight:500;color:var(--white);white-space:nowrap}
+.sec-orgs{color:var(--muted);font-size:.8rem}
+.sec-impact{color:var(--cream)}
+.sec-tag{
+  display:inline-block;padding:.15rem .5rem;
+  border:1px solid var(--border);font-family:'DM Mono',monospace;
+  font-size:.58rem;letter-spacing:.04em;color:var(--muted2);margin-right:.25rem;
+}
+
+/* ══════════════════════════════════════
+   EXPERIENCE
+══════════════════════════════════════ */
+#experience{background:var(--bg)}
+.exp-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);margin-top:2.2rem;
+}
+.exp-card{
+  background:var(--bg);padding:2rem;
+  transition:background .3s;
+}
+.exp-card:hover{background:var(--bg3)}
+.exp-period{
+  font-family:'DM Mono',monospace;font-size:.65rem;
+  letter-spacing:.1em;color:var(--gold);margin-bottom:.6rem;
+}
+.exp-title{
+  font-family:'Playfair Display',serif;font-size:1.08rem;
+  font-weight:700;color:var(--white);margin-bottom:.2rem;line-height:1.2;
+}
+.exp-org{font-size:.8rem;color:var(--muted);margin-bottom:.9rem}
+.exp-body{font-size:.86rem;color:var(--cream);line-height:1.65;opacity:.85}
+.exp-tag{
+  display:inline-block;margin-top:.9rem;
+  padding:.2rem .6rem;
+  background:rgba(200,169,81,.08);border:1px solid rgba(200,169,81,.2);
+  font-family:'DM Mono',monospace;font-size:.61rem;
+  letter-spacing:.06em;color:var(--gold);
+}
+
+/* ══════════════════════════════════════
+   VALUE
+══════════════════════════════════════ */
+#value{background:var(--bg2)}
+.value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-top:2.2rem}
+.value-card{
+  display:flex;gap:1.1rem;align-items:flex-start;
+  padding:1.7rem;border:1px solid var(--border);
+  transition:border-color .3s,background .3s;
+}
+.value-card:hover{border-color:var(--golddim);background:var(--bg3)}
+.v-icon{font-size:1.5rem;flex-shrink:0;margin-top:.1rem}
+.v-title{
+  font-family:'Playfair Display',serif;font-size:1.03rem;
+  font-weight:700;color:var(--white);margin-bottom:.4rem;
+}
+.v-body{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+/* ══════════════════════════════════════
+   BOARD
+══════════════════════════════════════ */
+#board{background:var(--bg);border-top:1px solid var(--border)}
+.board-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);margin-top:2.2rem;
+}
+.board-card{background:var(--bg);padding:1.7rem;transition:background .3s}
+.board-card:hover{background:var(--bg3)}
+.b-role{
+  font-family:'DM Mono',monospace;font-size:.62rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem;
+}
+.b-org{font-size:.9rem;font-weight:500;color:var(--white);line-height:1.35}
+
+/* ══════════════════════════════════════
+   CONTACT
+══════════════════════════════════════ */
+#contact{
+  background:var(--bg);
+  display:grid;grid-template-columns:1fr 340px;
+  gap:5rem;align-items:center;
+  padding:6rem 3.5rem;position:relative;overflow:hidden;
+}
+#contact::before{
+  content:'NS';position:absolute;right:-1rem;bottom:-3rem;
+  font-family:'Playfair Display',serif;font-size:16rem;font-weight:900;
+  color:rgba(255,255,255,.012);line-height:1;pointer-events:none;
+}
+.contact-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3vw,2.7rem);
+  font-weight:700;color:var(--white);line-height:1.1;margin-bottom:.9rem;
+}
+.contact-body{font-size:.92rem;color:var(--muted);line-height:1.65;margin-bottom:1.8rem}
+.contact-details{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem}
+.cd-label{
+  font-family:'DM Mono',monospace;font-size:.59rem;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.22rem;
+}
+.cd-val{font-size:.88rem;color:var(--cream)}
+.cd-val a{color:var(--gold);text-decoration:none}
+.cd-val a:hover{color:var(--gold2)}
+
+/* Contact photo */
+.contact-photo .photo-frame::after{
+  top:10px;right:10px;bottom:-10px;left:-10px;
+}
+.contact-photo .photo-frame:hover::after{
+  top:16px;right:16px;bottom:-16px;left:-16px;
+}
+.contact-quote{
+  background:var(--bg2);border-top:2px solid var(--gold);
+  padding:.9rem 1.1rem;
+}
+.contact-quote p{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:.86rem;color:var(--cream);line-height:1.5;
+}
+.contact-quote cite{
+  display:block;margin-top:.35rem;font-style:normal;
+  font-family:'DM Mono',monospace;font-size:.6rem;
+  letter-spacing:.1em;color:var(--gold);
+}
+
+/* ══════════════════════════════════════
+   EDUCATION
+══════════════════════════════════════ */
+#education{background:var(--bg2);padding:4.5rem 3.5rem}
+.edu-row{display:flex;gap:2.5rem;flex-wrap:wrap;margin-top:1.4rem}
+.edu-item{flex:1;min-width:170px}
+.edu-deg{font-family:'Playfair Display',serif;font-size:.93rem;font-weight:700;color:var(--white);margin-bottom:.22rem}
+.edu-inst{font-size:.8rem;color:var(--muted)}
+.edu-div{width:1px;background:var(--border);align-self:stretch}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer{
+  border-top:1px solid var(--border);padding:1.5rem 3.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+}
+footer p{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.07em;color:var(--muted2)}
+
+/* ══════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════ */
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}
+.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media(max-width:980px){
+  nav{padding:1rem 1.4rem}
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  section{padding:4rem 1.4rem}
+  #hero{grid-template-columns:1fr;padding:6rem 1.4rem 3.5rem;gap:2.5rem}
+  .hero-photo{order:-1;max-width:260px;margin:0 auto}
+  .hero-name{font-size:clamp(2.6rem,11vw,3.8rem)}
+  .hero-stats{gap:1.4rem}
+  .themes-grid{grid-template-columns:1fr}
+  .exp-grid{grid-template-columns:1fr}
+  .board-grid{grid-template-columns:1fr 1fr}
+  .value-grid{grid-template-columns:1fr}
+  .impact-grid{grid-template-columns:repeat(3,1fr)}
+  .impact-item:nth-child(3){border-right:none}
+  .impact-item:nth-child(n+4){border-top:1px solid var(--border)}
+  .impact-item:nth-child(6){border-right:none}
+  #contact{grid-template-columns:1fr;padding:4rem 1.4rem;gap:2.5rem}
+  .contact-photo{max-width:260px}
+  #contact::before{display:none}
+  .contact-details{gap:1.3rem}
+  .sectors-table thead{display:none}
+  .sectors-table td{display:block;padding:.35rem .7rem;border:none}
+  .sectors-table tr{border-bottom:1px solid var(--border);display:block;padding:.6rem 0}
+  .sec-tag{display:none}
+  .edu-row{flex-direction:column;gap:1.3rem}
+  .edu-div{display:none}
+  footer{flex-direction:column;gap:.7rem;text-align:center;padding:1.4rem}
+}
+@media(max-width:480px){
+  .board-grid{grid-template-columns:1fr}
+  .impact-grid{grid-template-columns:repeat(2,1fr)}
+  .impact-item:nth-child(odd){border-right:1px solid var(--border)}
+  .impact-item:nth-child(even){border-right:none}
+  .impact-item:nth-child(n+3){border-top:1px solid var(--border)}
+  .hero-stats{gap:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ════ NAV ════ -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Navanit <span>Samaiyar</span></a>
+  <div class="nav-links">
+    <a href="#themes">Themes</a>
+    <a href="#sectors">Sectors</a>
+    <a href="#experience">Experience</a>
+    <a href="#board">Board</a>
+    <a href="#contact" class="nav-cta">Connect ↗</a>
+  </div>
+  <button class="nav-burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile full-screen nav -->
+<div class="mobile-nav" id="mobileNav">
+  <span class="m-sub">Navigation</span>
+  <a href="#themes" class="m-link">Themes</a>
+  <hr>
+  <a href="#sectors" class="m-link">Sectors</a>
+  <hr>
+  <a href="#experience" class="m-link">Experience</a>
+  <hr>
+  <a href="#board" class="m-link">Board & Advisory</a>
+  <a href="#contact" class="m-link m-cta">Connect ↗</a>
+</div>
+
+<!-- ════ HERO ════ -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow" id="glow"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Turnaround & Scale-Up Advisor</p>
+    <h1 class="hero-name">Navanit<em>Samaiyar</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-tag">
+      <strong>30+ years</strong> building, scaling, and transforming organisations —
+      from GE Capital to national institutions, from 15 clinics to 600, from zero to 40×.
+      IIT &amp; XLRI educated. Global operator. Sought-after advisor.
+    </p>
+    <div class="hero-stats">
+      <div><div class="stat-num">40×</div><div class="stat-lbl">Revenue Growth<br>Genpact P&SC</div></div>
+      <div><div class="stat-num">30×</div><div class="stat-lbl">Clinic Network<br>Clove Dental</div></div>
+      <div><div class="stat-num">10M+</div><div class="stat-lbl">Youth Impacted<br>Annually</div></div>
+      <div><div class="stat-num">2</div><div class="stat-lbl">US Patents<br>Held</div></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold">↗ Engage as Advisor</a>
+      <a href="#experience" class="btn-ghost">View Experience</a>
+    </div>
+  </div>
+
+  <!-- PHOTO 1: Formal headshot (grey background, jacket) -->
+  <div class="hero-photo">
+    <div class="photo-frame">
+      <img id="heroImg" src="photo1.jpg" alt="Navanit Samaiyar"
+        onerror="this.style.display='none';document.getElementById('heroPlaceholder').style.display='flex'">
+      <div id="heroPlaceholder" style="display:none;background:linear-gradient(160deg,#181818,#222);aspect-ratio:3/4;flex-direction:column;align-items:center;justify-content:center;gap:14px">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#3a3a3a" stroke-width="1.2">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        <p style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.12em;color:#3a3a3a;text-align:center;line-height:1.6">
+          UPLOAD photo1.jpg<br>to your GitHub repo
+        </p>
+      </div>
+      <div class="photo-caption">
+        <span>Navanit Samaiyar · Advisor</span>
+        <div class="pulse-dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ THEMES ════ -->
+<section id="themes">
+  <p class="s-label reveal">Career Signature</p>
+  <h2 class="s-title reveal d1">Three things I do<br><em>consistently well.</em></h2>
+  <p class="s-sub reveal d2">Across sectors, geographies, and organisation types — three patterns repeat with unusual reliability.</p>
+  <div class="themes-grid">
+    <div class="theme-card reveal">
+      <div class="t-num">01</div>
+      <div class="t-icon">🏗</div>
+      <div class="t-title">Build &amp; Scale</div>
+      <p class="t-body">Serial creator of high-growth businesses and institutions — from greenfield to industry leadership. Comfortable starting with nothing and building strategy, team, commercial model, and operational infrastructure simultaneously.</p>
+      <p class="t-proof">40× Genpact · 30× Clove Dental · 2 ventures founded &amp; exited</p>
+    </div>
+    <div class="theme-card reveal d1">
+      <div class="t-num">02</div>
+      <div class="t-icon">⚡</div>
+      <div class="t-title">Digital Transform</div>
+      <p class="t-body">Pioneered technology adoption before it was fashionable — IoT devices, AI/ML skilling infrastructure, EHR rollouts, teledentistry, process automation, and supply chain digitisation. Currently building a live pharma IoT product.</p>
+      <p class="t-proof">2 US Patents · SCADA-equiv. IoT · 2M+ digital learners</p>
+    </div>
+    <div class="theme-card reveal d2">
+      <div class="t-num">03</div>
+      <div class="t-icon">🏛</div>
+      <div class="t-title">Institution Building</div>
+      <p class="t-body">Rare statesman-executive dimension: shaped national skilling policy, managed 250K+ indirect workforce, influenced 10M+ youth annually, and partnered with Government of India at the highest levels across ministries and national bodies.</p>
+      <p class="t-proof">NSDC · Ministry of Skill Dev. · ASSOCHAM · FICCI</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ IMPACT ════ -->
+<section id="impact">
+  <p class="s-label reveal" style="text-align:center;margin-bottom:1.5rem">Impact at a Glance</p>
+  <div class="impact-grid reveal">
+    <div class="impact-item"><span class="i-num">30+</span><span class="i-lbl">Years<br>Leadership</span></div>
+    <div class="impact-item"><span class="i-num">40×</span><span class="i-lbl">Revenue Growth<br>Genpact</span></div>
+    <div class="impact-item"><span class="i-num">30×</span><span class="i-lbl">Network Growth<br>Clove Dental</span></div>
+    <div class="impact-item"><span class="i-num">2M+</span><span class="i-lbl">Digital Learners<br>NASSCOM</span></div>
+    <div class="impact-item"><span class="i-num">25K+</span><span class="i-lbl">Associates Led<br>IBM GPS</span></div>
+    <div class="impact-item"><span class="i-num">10M+</span><span class="i-lbl">Youth Impacted<br>Annually</span></div>
+  </div>
+</section>
+
+<!-- ════ SECTORS ════ -->
+<section id="sectors">
+  <p class="s-label reveal">Breadth of Experience</p>
+  <h2 class="s-title reveal d1">Eight sectors.<br><em>One through-line.</em></h2>
+  <p class="s-sub reveal d2">Fortune 500 MNCs, Indian blue chips, government bodies, and early-stage start-ups.</p>
+  <table class="sectors-table reveal">
+    <thead><tr><th>Sector</th><th>Organisations</th><th>Impact Highlight</th><th>Type</th></tr></thead>
+    <tbody>
+      <tr><td><span class="sec-name">Supply Chain &amp; Procurement</span></td><td class="sec-orgs">Genpact (GE Capital), GE Industrial Systems, Tata Steel</td><td class="sec-impact">40× revenue growth; Top 100 Global SC Executives (2008)</td><td><span class="sec-tag">Fortune 500</span></td></tr>
+      <tr><td><span class="sec-name">Healthcare / Dental</span></td><td class="sec-orgs">Clove Dental</td><td class="sec-impact">15 → 600 clinics, 30× growth in 3 years; full digital transformation</td><td><span class="sec-tag">Scale-Up</span></td></tr>
+      <tr><td><span class="sec-name">EdTech / Digital Skills</span></td><td class="sec-orgs">NASSCOM (GoI partnership)</td><td class="sec-impact">2M+ learners, 22M+ badges, 430+ courses, 36M visits</td><td><span class="sec-tag">National Body</span></td></tr>
+      <tr><td><span class="sec-name">BPO / CX Outsourcing</span></td><td class="sec-orgs">IBM Global Process Services, Genpact</td><td class="sec-impact">25,000+ associates, 20+ centres, 40%+ business growth</td><td><span class="sec-tag">Fortune 500</span></td></tr>
+      <tr><td><span class="sec-name">Public Policy / Skills</span></td><td class="sec-orgs">ASTP, Ministry of Skill Development, NSDC</td><td class="sec-impact">10M+ youth annually, 718 districts, 15M sq ft infrastructure</td><td><span class="sec-tag">Govt. Body</span></td></tr>
+      <tr><td><span class="sec-name">IoT / Deep Technology</span></td><td class="sec-orgs">Growth Accelerator Tech, Stealth IoT Venture</td><td class="sec-impact">2 US Patents; SCADA-equiv. pharma IoT device; venture built &amp; exited</td><td><span class="sec-tag">Founder</span></td></tr>
+      <tr><td><span class="sec-name">Pharma / Life Sciences</span></td><td class="sec-orgs">Growth Accelerator Tech — The India Source</td><td class="sec-impact">Make-in-India sourcing; PET scanners, SiC wafers tech transfer</td><td><span class="sec-tag">Venture</span></td></tr>
+      <tr><td><span class="sec-name">Agribusiness / Floriculture</span></td><td class="sec-orgs">Mishan Flora</td><td class="sec-impact">India's first export floriculture; 20,000+ roses/day to Europe</td><td><span class="sec-tag">Co-Founder</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ════ EXPERIENCE ════ -->
+<section id="experience">
+  <p class="s-label reveal">Career Highlights</p>
+  <h2 class="s-title reveal d1">Where the work<br><em>was done.</em></h2>
+  <div class="exp-grid">
+    <div class="exp-card reveal"><p class="exp-period">2002 — 2011</p><p class="exp-title">SVP &amp; Global BU Head, Procurement &amp; Supply Chain</p><p class="exp-org">Genpact (GE Capital Services) · India / Global</p><p class="exp-body">Built the P&SC business unit from zero through the 2005 GE Capital carve-out. Full P&L ownership. Pioneered time-zone arbitrage, outcome-based pricing, and real-time WMS outsourcing — commercial models that became industry standard.</p><span class="exp-tag">40× Revenue Growth</span></div>
+    <div class="exp-card reveal d1"><p class="exp-period">2014 — 2017</p><p class="exp-title">COO &amp; Board Member</p><p class="exp-org">Clove Dental · India</p><p class="exp-body">Joined at 15 clinics. Scaled to 600 clinics and 1,200+ dentists in 3 years — one of the fastest clinic network builds in Indian healthcare. Led full digital transformation: EHR, tele-dentistry, and patient engagement platforms across the network.</p><span class="exp-tag">30× Network Growth</span></div>
+    <div class="exp-card reveal"><p class="exp-period">2021 — 2025</p><p class="exp-title">Head — Future Skills</p><p class="exp-org">NASSCOM · India</p><p class="exp-body">Built India's largest EdTech platform for digital skills in partnership with GoI. 2M+ learners, 22M+ digital badges, 430+ industry-aligned courses. A national digital talent supply chain built from scratch.</p><span class="exp-tag">2M+ Learners</span></div>
+    <div class="exp-card reveal d1"><p class="exp-period">2011 — 2013</p><p class="exp-title">Executive Director &amp; Country Head</p><p class="exp-org">IBM Global Process Services · India</p><p class="exp-body">Led CX and Technical Product Services for global clients. Managed 25,000+ associates across 20+ delivery centres. Delivered 40%+ business growth through service expansion and CXO-level relationship management.</p><span class="exp-tag">25K+ Associates</span></div>
+    <div class="exp-card reveal"><p class="exp-period">2018 — 2021</p><p class="exp-title">CEO &amp; Governing Board Member</p><p class="exp-org">Alliance of Skill Training Partners (ASTP) · India</p><p class="exp-body">Led national body shaping skills of 10M+ youth annually across all 718 districts. 15M sq ft of training infrastructure. Advisor to Ministry of Skill Development, NSDC, ASSOCHAM, and FICCI.</p><span class="exp-tag">10M+ Youth · Policy</span></div>
+    <div class="exp-card reveal d1"><p class="exp-period">2025 — Present</p><p class="exp-title">Managing Director &amp; Co-Founder</p><p class="exp-org">Growth Accelerator Tech — The India Source · Global</p><p class="exp-body">Co-founding dual-track venture: Sensor+ (SCADA-equivalent IoT for pharma) and The India Source (Make-in-India critical component sourcing). Offices across North America, Europe, and India.</p><span class="exp-tag">Founder · IoT · Pharma</span></div>
+  </div>
+</section>
+
+<!-- ════ VALUE ════ -->
+<section id="value">
+  <p class="s-label reveal">What I Bring</p>
+  <h2 class="s-title reveal d1">Advisory<br><em>value proposition.</em></h2>
+  <p class="s-sub reveal d2">What organisations engaging me as an advisor gain access to.</p>
+  <div class="value-grid">
+    <div class="value-card reveal"><div class="v-icon">🔭</div><div><p class="v-title">Operator Credibility</p><p class="v-body">Not a career consultant — a practitioner who has run the P&L, built the team, and delivered the numbers. Every framework offered has been tested in the field across multiple sectors.</p></div></div>
+    <div class="value-card reveal d1"><div class="v-icon">🌐</div><div><p class="v-title">Global Perspective</p><p class="v-body">Operated across India, USA, Europe, and the Middle East. Led Fortune 500 CEOs and GoI ministries in the same career. Understands both boardrooms and ground realities.</p></div></div>
+    <div class="value-card reveal d2"><div class="v-icon">📈</div><div><p class="v-title">Turnaround &amp; Scale-Up Playbook</p><p class="v-body">Repeatable approach to exponential growth across diverse contexts. Pattern recognition across eight sectors — from BPO to dental chains to national skilling bodies — is the core differentiator.</p></div></div>
+    <div class="value-card reveal d3"><div class="v-icon">🤖</div><div><p class="v-title">Technology &amp; AI Fluency</p><p class="v-body">2 US patents. Currently building pharma IoT product. Led India's national AI/ML skilling infrastructure. Not a technology theorist — an operator who has deployed technology at scale.</p></div></div>
+  </div>
+</section>
+
+<!-- ════ BOARD ════ -->
+<section id="board">
+  <p class="s-label reveal">Governance</p>
+  <h2 class="s-title reveal d1">Board &amp; Advisory<br><em>engagements.</em></h2>
+  <div class="board-grid reveal">
+    <div class="board-card"><p class="b-role">Board Member</p><p class="b-org">Clove Dental</p></div>
+    <div class="board-card"><p class="b-role">Governing Board Member</p><p class="b-org">Alliance of Skill Training Partners (ASTP)</p></div>
+    <div class="board-card"><p class="b-role">Government Advisor</p><p class="b-org">Ministry of Skill Development &amp; Entrepreneurship, GoI</p></div>
+    <div class="board-card"><p class="b-role">Advisor</p><p class="b-org">National Skill Development Corporation (NSDC)</p></div>
+    <div class="board-card"><p class="b-role">Industry Body Advisor</p><p class="b-org">ASSOCHAM &amp; FICCI</p></div>
+    <div class="board-card"><p class="b-role">Patent Holder</p><p class="b-org">"Call Centre Optimisation" &amp; "Career Pathing in ITES" — US Patent Office</p></div>
+  </div>
+</section>
+
+<!-- ════ EDUCATION ════ -->
+<section id="education">
+  <p class="s-label reveal">Credentials</p>
+  <h2 class="s-title reveal d1" style="font-size:1.85rem">Education &amp; Honours</h2>
+  <div class="edu-row reveal">
+    <div class="edu-item"><p class="edu-deg">PGDM — Finance &amp; Marketing</p><p class="edu-inst">XLRI Jamshedpur</p></div>
+    <div class="edu-div"></div>
+    <div class="edu-item"><p class="edu-deg">B.Tech — Mining Machinery</p><p class="edu-inst">IIT (ISM) Dhanbad</p></div>
+    <div class="edu-div"></div>
+    <div class="edu-item"><p class="edu-deg">Six Sigma Green Belt</p><p class="edu-inst">General Electric (GE)</p></div>
+    <div class="edu-div"></div>
+    <div class="edu-item"><p class="edu-deg">Top 100 Global SC Executives</p><p class="edu-inst">S&D Chain Executive, 2008</p></div>
+  </div>
+</section>
+
+<!-- ════ CONTACT ════ -->
+<section id="contact">
+  <div style="position:relative;z-index:2">
+    <p class="s-label reveal">Get in Touch</p>
+    <h2 class="contact-title reveal d1">Let's explore<br><em style="font-style:italic;color:var(--gold)">working together.</em></h2>
+    <p class="contact-body reveal d2">Available for board roles, senior advisory mandates, and strategic consulting engagements with organisations serious about turnaround, scale-up, or digital transformation.</p>
+    <div class="contact-details reveal d3">
+      <div><p class="cd-label">Email</p><p class="cd-val">nsamaiyar@gmail.com</p></div>
+      <div><p class="cd-label">Phone</p><p class="cd-val">+91 98738 03711</p></div>
+      <div><p class="cd-label">Location</p><p class="cd-val">Gurgaon, India</p></div>
+      <div><p class="cd-label">LinkedIn</p><p class="cd-val"><a href="https://linkedin.com/in/navanit-samaiyar-b80b4910" target="_blank">navanit-samaiyar ↗</a></p></div>
+    </div>
+    <div class="hero-btns reveal d4">
+      <a href="mailto:nsamaiyar@gmail.com" class="btn-gold">↗ Send an Email</a>
+      <a href="https://linkedin.com/in/navanit-samaiyar-b80b4910" target="_blank" class="btn-ghost">LinkedIn Profile</a>
+    </div>
+  </div>
+
+  <!-- PHOTO 2: Warm portrait (kurta, smiling) -->
+  <div class="contact-photo reveal d2">
+    <div class="photo-frame">
+      <img id="contactImg" src="photo2.jpg" alt="Navanit Samaiyar"
+        onerror="this.style.display='none';document.getElementById('contactPlaceholder').style.display='flex'">
+      <div id="contactPlaceholder" style="display:none;background:linear-gradient(160deg,#181818,#222);aspect-ratio:3/4;flex-direction:column;align-items:center;justify-content:center;gap:14px">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#3a3a3a" stroke-width="1.2">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        <p style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.12em;color:#3a3a3a;text-align:center;line-height:1.6">
+          UPLOAD photo2.jpg<br>to your GitHub repo
+        </p>
+      </div>
+      <div class="contact-quote">
+        <p>"I have 4–5 more years of quality contribution ahead — and I want to put that where it counts."</p>
+        <cite>— Navanit Samaiyar</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <p>© 2025 Navanit Samaiyar · samaiyaradvisory.com</p>
+  <p>IIT (ISM) · XLRI · GE Six Sigma · 2 US Patents · Top 100 Global SC Executive</p>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 55), {passive:true});
+
+// Hamburger
+const burger = document.getElementById('burger');
+const mobileNav = document.getElementById('mobileNav');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+  document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('.m-link').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileNav.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in') });
+}, {threshold:.08, rootMargin:'0px 0px -25px 0px'});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Hero glow follows cursor
+const heroSection = document.getElementById('hero');
+const glowEl = document.getElementById('glow');
+heroSection.addEventListener('mousemove', e => {
+  const r = heroSection.getBoundingClientRect();
+  const x = ((e.clientX - r.left) / r.width * 100).toFixed(1);
+  const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1);
+  glowEl.style.background = `radial-gradient(ellipse at ${x}% ${y}%, rgba(200,169,81,.1) 0%, transparent 60%)`;
+}, {passive:true});
+</script>
+</body>
+</html>
